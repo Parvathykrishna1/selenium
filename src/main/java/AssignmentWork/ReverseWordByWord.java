@@ -1,6 +1,6 @@
 package AssignmentWork;
 
-public class ReverseSentences {
+public class ReverseWordByWord {
     public static void main(String[] args){
         String str="I Am Tom";
         StringBuilder rev= new StringBuilder();

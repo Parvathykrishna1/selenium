@@ -1,6 +1,6 @@
 package AssignmentWork;
 import java.util.regex.Pattern;
-public class ReverseString {
+public class ReverseSentance {
     public static void main(String[] args) {
         String s1 = "I Am Tom";
         Pattern pattern = Pattern.compile(" ");
