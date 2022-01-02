@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.List;
 
-public class HomeWork1 {
+public class HomeWork2 {
     static WebDriver driver;
 
     public static void testInitials(String browser) {
@@ -32,24 +32,22 @@ public class HomeWork1 {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
     }
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         testInitials("Chrome");
-        driver.get("http://demowebshop.tricentis.com/login?ReturnUrl=%2fcustomer%2finfo");
+        driver.get("http://demowebshop.tricentis.com/register");
         String actualTitle = driver.getTitle();
         System.out.println(actualTitle);
-        String currentUrl= driver.getCurrentUrl();
+        String currentUrl = driver.getCurrentUrl();
         System.out.println(currentUrl);
-        String pageSource=driver.getPageSource();
-        //  System.out.println(pageSource);
-        WebElement name=driver.findElement(By.name("Password"));
-        WebElement name1=driver.findElement(By.className("password"));
-        WebElement name2=driver.findElement(By.id("Password"));
-        WebElement name3=driver.findElement(By.cssSelector("#Password"));
-        WebElement name4=driver.findElement(By.xpath("//*[@id=\"Password\"]"));
-        WebElement name5=driver.findElement(By.linkText("Log in"));
-        WebElement name6=driver.findElement(By.partialLinkText("Log"));
-        List<WebElement> name7=driver.findElements(By.tagName("input"));
+        String pageSource = driver.getPageSource();
+        WebElement name = driver.findElement(By.name("FirstName"));
+        WebElement name1 = driver.findElement(By.className("inputs"));
+        WebElement name2 = driver.findElement(By.id("FirstName"));
+        WebElement name3 = driver.findElement(By.cssSelector("#FirstName"));
+        WebElement name4 = driver.findElement(By.xpath("//*[@id=\"FirstName\"]"));
+        WebElement name5 = driver.findElement(By.linkText("Log in"));
+        WebElement name6 = driver.findElement(By.partialLinkText("Log"));
+        List<WebElement> name7 = driver.findElements(By.tagName("input"));
         System.out.println(name);
         System.out.println(name1);
         System.out.println(name2);
@@ -59,7 +57,6 @@ public class HomeWork1 {
         System.out.println(name6);
         System.out.println(name7.size());
         driver.close();
-
     }
-}
 
+}
