@@ -50,6 +50,7 @@ public class SeleniumLaunch {
         WebElement userName5 = driver.findElement(By.linkText("Log in"));
         WebElement userName6 = driver.findElement(By.partialLinkText("Log"));
         List<WebElement> tags = driver.findElements(By.tagName("input"));
+
         System.out.println(tags.size());
         System.out.println(userName5);
         System.out.println(userName6);

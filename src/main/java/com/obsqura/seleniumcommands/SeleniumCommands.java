@@ -38,11 +38,14 @@ public class SeleniumCommands {
     public void setUp() {
         testInitials("Chrome");
     }
+
     @AfterMethod
     public void tearDone(){
         driver.close();
     }
+
     @Test(priority=1)
+
     public void verifyLogin(){
     driver.get("http://demowebshop.tricentis.com/");
     WebElement loginMenu= driver.findElement(By.xpath("//a[@class='ico-login']"));
@@ -54,6 +57,29 @@ public class SeleniumCommands {
     WebElement loginButton = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
     String value = loginButton.getAttribute("value");
     loginButton.click();
+    }
 
+    @Test(priority=2)
+
+    public void registration(){
+        driver.get("http://demowebshop.tricentis.com/");
+        WebElement registerMenu= driver.findElement(By.xpath("//a[@class='ico-register']"));
+        registerMenu.click();
+        WebElement gender = driver.findElement(By.xpath("//input[@name='Gender']"));
+        gender.click();
+        WebElement firstName = driver.findElement(By.id("FirstName"));
+        firstName.sendKeys("parvathy");
+        WebElement lastName = driver.findElement(By.id("LastName"));
+        lastName.sendKeys("krishna");
+        WebElement email = driver.findElement(By.id("Email"));
+        email.sendKeys("parvathyk285@gmail.com");
+        WebElement password = driver.findElement(By.xpath("//input[@name='Password']"));
+        password.sendKeys("Parvathy#1998");
+        WebElement confirmPassword = driver.findElement(By.xpath("//input[@name='ConfirmPassword']"));
+        confirmPassword.sendKeys("Parvathy#1998");
+        WebElement registerButton = driver.findElement(By.id("register-button"));
+        registerButton.click();
+        WebElement successfulMessage = driver.findElement(By.id("register-button"));
+        successfulMessage.getText();
     }
 }
