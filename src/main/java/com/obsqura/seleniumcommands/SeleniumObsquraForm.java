@@ -1,5 +1,6 @@
 package com.obsqura.seleniumcommands;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -132,6 +133,56 @@ public class SeleniumObsquraForm {
         WebElement showPatientMsg = driver.findElement(By.id("message-two"));
         String msgs = showPatientMsg.getText();
         System.out.println(msgs);
+    }
+
+    @Test(priority = 6)
+    public void verifyFileUpload() {
+        driver.get("https://demo.guru99.com/test/upload");
+        WebElement chooseFile = driver.findElement(By.id("uploadfile_0"));
+        chooseFile.sendKeys("C:\\Users\\ravat\\Downloads\\Parvathykrishna-Assignment.doc");
+        WebElement chkBoxAcceptFile = driver.findElement(By.xpath("//input[@id='terms']"));
+        chkBoxAcceptFile.click();
+        WebElement btnSubmitFile = driver.findElement(By.id("submitbutton"));
+        btnSubmitFile.click();
+    }
+
+    @Test(priority = 7)
+    public void verifySimpleAlert() {
+        driver.get(" https://demoqa.com/alerts");
+        WebElement btnClickMe = driver.findElement(By.id("alertButton"));
+        btnClickMe.click();
+        Alert alert = driver.switchTo().alert();
+        String actAlertTxt = alert.getText();
+        System.out.println(actAlertTxt);
+        alert.accept();
+    }
+
+    @Test(priority = 8)
+    public void verifyConfirmationAlert() {
+        driver.get("https://demoqa.com/alerts");
+        WebElement btnConfrm = driver.findElement(By.xpath("//button[@id='confirmButton']"));
+        btnConfrm.click();
+        Alert alert = driver.switchTo().alert();
+        String actAlertText = alert.getText();
+        System.out.println(actAlertText);
+        alert.accept();
+        //alert.dismiss();
+        WebElement confirmText = driver.findElement(By.id("confirmResult"));
+        String cText = confirmText.getText();
+        System.out.println(cText);
+    }
+
+    @Test(priority = 9)
+    public void verifyPromptAlert() {
+
+        driver.get("https://demoqa.com/alerts");
+        WebElement btnPromptAlert = driver.findElement(By.id("promtButton"));
+        btnPromptAlert.click();
+        Alert alert = driver.switchTo().alert();
+        String actAlertTxt = alert.getText();
+        System.out.println(actAlertTxt);
+        alert.sendKeys("raj");
+        alert.accept();
     }
 }
 

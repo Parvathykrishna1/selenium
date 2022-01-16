@@ -157,103 +157,8 @@ public class SeleniumCommands {
         }
     }
 
+
     @Test(priority = 6)
-    public void verifySingleInputField() {
-        driver.get("https://selenium.obsqurazone.com/simple-form-demo.php");
-        WebElement enterMessage = driver.findElement(By.id("single-input-field"));
-        enterMessage.sendKeys("Hello");
-        WebElement showMessage = driver.findElement(By.id("button-one"));
-        showMessage.click();
-    }
-
-    @Test(priority = 7)
-    public void verifyTwoInputFields() {
-        driver.get("https://selenium.obsqurazone.com/simple-form-demo.php");
-        WebElement enterValueA = driver.findElement(By.id("value-a"));
-        enterValueA.sendKeys("Good");
-        WebElement enterValueB = driver.findElement(By.id("value-b"));
-        enterValueB.sendKeys("Morning");
-        WebElement getTotal = driver.findElement(By.id("button-two"));
-        getTotal.click();
-    }
-
-    @Test(priority = 8)
-    public void verifySingleCheckboxDemo() {
-        driver.get("https://selenium.obsqurazone.com/check-box-demo.php");
-        WebElement clickOnThisCheckBox = driver.findElement(By.xpath("//label[@class='form-check-label']"));
-        boolean notSelected = clickOnThisCheckBox.isSelected();
-        System.out.println(notSelected);
-        clickOnThisCheckBox.click();
-        boolean selected = clickOnThisCheckBox.isSelected();
-        System.out.println(selected);
-    }
-
-    @Test(priority = 9)
-    public void verifyMultipleCheckboxDemo() {
-        driver.get("https://selenium.obsqurazone.com/check-box-demo.php");
-        WebElement checkBoxOne = driver.findElement(By.xpath("//label[@for='check-box-one']"));
-        WebElement checkBoxThree = driver.findElement(By.xpath("//label[@for='check-box-three']"));
-        boolean notSelected = checkBoxOne.isSelected();
-        System.out.println(notSelected);
-        checkBoxOne.click();
-        checkBoxThree.click();
-        boolean selected = checkBoxThree.isSelected();
-        System.out.println(selected);
-    }
-
-    @Test(priority = 10)
-    public void verifyRadioButtonDemo() {
-        driver.get("https://selenium.obsqurazone.com/radio-button-demo.php");
-        genderSelected("Male");
-        WebElement showSelectedValue = driver.findElement(By.id("button-one"));
-        showSelectedValue.click();
-    }
-
-    public void genderSelected(String gender) {
-        List<WebElement> genderSelection = driver.findElements(By.xpath("//div[@class='form-check form-check-inline']//label"));
-        for (int i = 0; i < genderSelection.size(); i++) {
-            String value = genderSelection.get(i).getText();
-            if (value.equals(gender)) {
-                genderSelection.get(i).click();
-                break;
-            }
-
-        }
-    }
-
-    @Test(priority = 11)
-    public void verifyRadioButtonsDemo() {
-        driver.get("https://selenium.obsqurazone.com/radio-button-demo.php");
-        verifyGender("Male");
-        verifyAge("19 t0 44");
-        WebElement getResults = driver.findElement(By.id("button-two"));
-        getResults.click();
-    }
-
-
-    public void verifyGender(String gender) {
-        List<WebElement> genderSelection = driver.findElements(By.xpath("//div[@class='form-check form-check-inline']//label[@for='inlineRadio11']"));
-        for (int i = 0; i < genderSelection.size(); i++) {
-            String value = genderSelection.get(i).getText();
-            if (value.equals(gender)) {
-                genderSelection.get(i).click();
-                break;
-            }
-        }
-    }
-
-    public void verifyAge(String age) {
-        List<WebElement> ageSelection = driver.findElements(By.xpath("//div[@class='form-check form-check-inline']//label"));
-        for (int i = 0; i < ageSelection.size(); i++) {
-            String value = ageSelection.get(i).getText();
-            if (value.equals(age)) {
-                ageSelection.get(i).click();
-                break;
-            }
-        }
-    }
-
-    @Test(priority = 12)
     public void verifyDropDowns() {
         driver.get("https://demo.guru99.com/selenium/newtours/");
         WebElement registerMenu = driver.findElement(By.xpath("//a[@href='register.php']"));
@@ -270,11 +175,11 @@ public class SeleniumCommands {
         List<WebElement> dropDownObject = select.getOptions();
         List<String> actlDropDownValue = new ArrayList<>();
         for (int i = 0; i < dropDownObject.size(); i++) {
-        actlDropDownValue.add(dropDownObject.get(i).getText());
+            actlDropDownValue.add(dropDownObject.get(i).getText());
         }
         System.out.println(actlDropDownValue.size());
         System.out.println(actlDropDownValue);
-        Assert.assertEquals(actlDropDownValue,expDropDownValue,"Error:Invalid DropDown Data");
+        Assert.assertEquals(actlDropDownValue, expDropDownValue, "Error:Invalid DropDown Data");
 
     }
 }
