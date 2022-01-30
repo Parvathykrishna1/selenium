@@ -7,15 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class SeleniumObsquraForm {
-    WebDriver driver;
+public class SeleniumObsquraForms {
+    static WebDriver driver;
 
-    public void testInitials(String browser) {
+    public static void testInitials(String browser) {
         if (browser.equals("Chrome")) {
             System.setProperty("webdriver.chrome.driver", "C:\\selenium\\selenium driver\\chromedriver.exe");
             driver = new ChromeDriver();
@@ -36,35 +37,41 @@ public class SeleniumObsquraForm {
         driver.manage().deleteAllCookies();
     }
 
+
     @BeforeMethod
     public void setUp() {
         testInitials("Chrome");
     }
 
+    @AfterMethod
     public void tearDone() {
         driver.close();
     }
 
-
     @Test(priority = 1)
-    public void verifyInputForm() {
-        driver.get("https://selenium.obsqurazone.com/index.php");
-        WebElement inputForm = driver.findElement(By.xpath("//a[@href='simple-form-demo.php']"));
-        inputForm.click();
-        WebElement messageField = driver.findElement(By.xpath("//input[@id='single-input-field']"));
-        messageField.sendKeys("testing obsqura form");
-        WebElement showButton = driver.findElement(By.xpath("//button[@id='button-one']"));
-        showButton.click();
+    public void verifySingleInput() {
+        driver.get("https://selenium.obsqurazone.com/simple-form-demo.php");
+        WebElement message = driver.findElement(By.id("single-input-field"));
+        message.sendKeys("Hello World");
+        WebElement showMessageButton = driver.findElement(By.id("button-one"));
+        showMessageButton.click();
+        boolean displayed = showMessageButton.isDisplayed();
+        System.out.println(displayed);
         WebElement successMsg = driver.findElement(By.xpath("//div[@id='message-one']"));
         String v = successMsg.getText();
         System.out.println(v);
-        WebElement valueAfield = driver.findElement(By.id("value-a"));
-        valueAfield.sendKeys("100");
-        WebElement valueBfield = driver.findElement(By.id("value-b"));
-        valueBfield.sendKeys("500");
+    }
+
+    @Test(priority = 2)
+    public void verifyTwoInput() {
+        driver.get("https://selenium.obsqurazone.com/simple-form-demo.php");
+        WebElement valueA = driver.findElement(By.id("value-a"));
+        valueA.sendKeys("Good");
+        WebElement valueB = driver.findElement(By.id("value-b"));
+        valueB.sendKeys("Morning");
         WebElement getTotal = driver.findElement(By.id("button-two"));
         getTotal.click();
-        WebElement successMsg2 = driver.findElement(By.id("message-two"));
+        WebElement successMsg2 = driver.findElement(By.xpath("//div[@id='message-two']"));
         String v2 = successMsg2.getText();
         System.out.println(v2);
     }
@@ -88,8 +95,7 @@ public class SeleniumObsquraForm {
         driver.get("https://selenium.obsqurazone.com/check-box-demo.php");
         WebElement box = driver.findElement(By.id("gridCheck"));
         box.click();
-        selectCheckbox("Check Box One", "Check Box Two");
-
+        selectCheckbox("Check Box One", "Check Box Three");
     }
 
     public void selectCheckbox(String value1, String value2) {
@@ -106,7 +112,6 @@ public class SeleniumObsquraForm {
 
 
         }
-
     }
 
     @Test(priority = 4)
@@ -135,55 +140,20 @@ public class SeleniumObsquraForm {
         System.out.println(msgs);
     }
 
-    @Test(priority = 6)
-    public void verifyFileUpload() {
-        driver.get("https://demo.guru99.com/test/upload");
-        WebElement chooseFile = driver.findElement(By.id("uploadfile_0"));
-        chooseFile.sendKeys("C:\\Users\\ravat\\Downloads\\Parvathykrishna-Assignment.doc");
-        WebElement chkBoxAcceptFile = driver.findElement(By.xpath("//input[@id='terms']"));
-        chkBoxAcceptFile.click();
-        WebElement btnSubmitFile = driver.findElement(By.id("submitbutton"));
-        btnSubmitFile.click();
+    @Test(priority = 5)
+    public void verifyCommunityPoll() {
+        driver.get("http://demowebshop.tricentis.com/");
+        selectCommunityPoll("Good");
     }
 
-    @Test(priority = 7)
-    public void verifySimpleAlert() {
-        driver.get(" https://demoqa.com/alerts");
-        WebElement btnClickMe = driver.findElement(By.id("alertButton"));
-        btnClickMe.click();
-        Alert alert = driver.switchTo().alert();
-        String actAlertTxt = alert.getText();
-        System.out.println(actAlertTxt);
-        alert.accept();
-    }
-
-    @Test(priority = 8)
-    public void verifyConfirmationAlert() {
-        driver.get("https://demoqa.com/alerts");
-        WebElement btnConfrm = driver.findElement(By.xpath("//button[@id='confirmButton']"));
-        btnConfrm.click();
-        Alert alert = driver.switchTo().alert();
-        String actAlertText = alert.getText();
-        System.out.println(actAlertText);
-        alert.accept();
-        //alert.dismiss();
-        WebElement confirmText = driver.findElement(By.id("confirmResult"));
-        String cText = confirmText.getText();
-        System.out.println(cText);
-    }
-
-    @Test(priority = 9)
-    public void verifyPromptAlert() {
-
-        driver.get("https://demoqa.com/alerts");
-        WebElement btnPromptAlert = driver.findElement(By.id("promtButton"));
-        btnPromptAlert.click();
-        Alert alert = driver.switchTo().alert();
-        String actAlertTxt = alert.getText();
-        System.out.println(actAlertTxt);
-        alert.sendKeys("raj");
-        alert.accept();
+    public void selectCommunityPoll(String poll) {
+        List<WebElement> communityPoll = driver.findElements(By.xpath("//Li[@class='answer']/label"));
+        for (int i = 0; i < communityPoll.size(); i++) {
+            String value = communityPoll.get(i).getText();
+            if (value.equals(poll)) {
+                communityPoll.get(i).click();
+                break;
+            }
+        }
     }
 }
-
-
