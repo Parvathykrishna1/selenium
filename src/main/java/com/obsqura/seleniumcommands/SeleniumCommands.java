@@ -390,7 +390,9 @@ public class SeleniumCommands {
         List<String> expData = new ArrayList<>(Arrays.asList("Island Trading","Helen Bennett","UK"));
         List<WebElement> rowElement = driver.findElements(By.xpath("//table[@id='customers']//tr"));
         System.out.println(rowElement.size());
+        for(int i=2;i< rowElement.size();i++){
 
+        }
     }
 }
 
