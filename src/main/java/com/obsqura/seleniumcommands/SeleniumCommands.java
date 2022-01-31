@@ -1,5 +1,6 @@
 package com.obsqura.seleniumcommands;
 
+import com.obsqura.TableUtility;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -387,12 +388,45 @@ public class SeleniumCommands {
     public void verifyTable() {
         driver.get("https://www.w3schools.com/html/html_tables.asp");
         List<String> actData = new ArrayList<>();
-        List<String> expData = new ArrayList<>(Arrays.asList("Island Trading","Helen Bennett","UK"));
+        List<String> expData = new ArrayList<>(Arrays.asList("Island Trading", "Helen Bennett", "UK"));
         List<WebElement> rowElement = driver.findElements(By.xpath("//table[@id='customers']//tr"));
         System.out.println(rowElement.size());
-        for(int i=2;i< rowElement.size();i++){
+        for (int i = 2; i < rowElement.size(); i++) {
+            List<WebElement> colElement = driver.findElements(By.xpath("//table[@id='customers']//tr[" + i + "]//td"));
+            String cellValue = colElement.get(0).getText();
+            if (cellValue.equals("Island Trading")) {
+                for (int j = 0; j < colElement.size(); j++) {
+                    String value = colElement.get(j).getText();
+                    actData.add(value);
+                }
+            }
+        }
+        System.out.println(actData);
+        Assert.assertEquals(actData, expData, "ERROR::Invalid Message");
+    }
+
+    @Test(priority = 22)
+    public void verifyTableUsingUtility() {
+        driver.get("https://www.w3schools.com/html/html_tables.asp");
+        List<String> actData = new ArrayList<>();
+        List<String> expData = new ArrayList<>(Arrays.asList("Island Trading", "Helen Bennett", "UK"));
+        List<WebElement> rowElement = driver.findElements(By.xpath("//table[@id='customers']//tr"));
+        List<WebElement> colElement = driver.findElements(By.xpath("//table[@id='customers']//tr//td"));
+        List<ArrayList<String>> dataTable = TableUtility.get_Dynamic_TwoDimension_TableElements(rowElement,colElement);
+        System.out.println(dataTable);
+        String value = dataTable.get(3).get(0);
+        System.out.println(value);
+      /* for(int i=0;i<dataTable.size();i++){
+            String value = dataTable.get(i).get(0);
+            if(value.equals("Island Trading")){
+                for(int j=0;j<dataTable.size();j++){
+                    actData.add(dataTable.get(i).get(j));
+                }
+            }
 
         }
+        System.out.println(actData);
+        Assert.assertEquals(actData,expData,"Island Trading not present in table");*/
     }
 }
 

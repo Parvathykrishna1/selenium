@@ -1,6 +1,5 @@
 package com.obsqura.seleniumcommands;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -153,6 +152,48 @@ public class SeleniumObsquraForms {
             if (value.equals(poll)) {
                 communityPoll.get(i).click();
                 break;
+            }
+        }
+    }
+
+
+    @Test(priority = 6)
+    public void printTableData() {
+        driver.get("https://the-internet.herokuapp.com/tables");
+        List<WebElement> tableRows = driver.findElements(By.xpath("//table[@id='table1']//tr"));
+        System.out.println(tableRows.size());
+        for (int i = 1; i < tableRows.size(); i++) {
+            List<WebElement> tableColumns = driver.findElements(By.xpath("//table[@id='table1']//tr[" + i + "]//td"));
+            String cellValue = tableColumns.get(0).getText();
+            for (int j = 0; j < tableColumns.size(); j++) {
+                System.out.println(tableColumns.get(j).getText());
+            }
+            System.out.println(i);
+        }
+    }
+
+
+    @Test(priority = 7)
+    public void printColumn() {
+        driver.get("https://money.rediff.com/gainers/bse/daily/groupa?src=gain_lose");
+        WebElement firstValue = driver.findElement(By.xpath("//table[@class='dataTable']/tbody/tr[1]/td[1]"));
+        System.out.println(firstValue.getText());
+
+        List<WebElement> printCompanyNames = driver.findElements(By.xpath("//table[@class='dataTable']/tbody/tr/td[1]"));
+        for (int i = 1; i < printCompanyNames.size(); i++) {
+            System.out.println(printCompanyNames.get(i).getText());
+        }
+
+        List<WebElement> companyNames = driver.findElements(By.xpath("//table[@class='dataTable']/tbody/tr/td[1]"));
+        List<WebElement> currentPrice = driver.findElements(By.xpath("//table[@class='dataTable']/tbody/tr/td[4]"));
+        for (int j = 0; j < companyNames.size(); j++) {
+            if (companyNames.get(j).getText().equalsIgnoreCase("Nava Bharat Ventures")) {
+                System.out.println(currentPrice.get(j).getText());
+            }
+
+            List<WebElement> printSecondRow = driver.findElements(By.xpath("//table[@class='dataTable']/tbody/tr[2]/td"));
+            for (int k = 0; k < printSecondRow.size(); k++) {
+                System.out.println(printSecondRow.get(k).getText());
             }
         }
     }
