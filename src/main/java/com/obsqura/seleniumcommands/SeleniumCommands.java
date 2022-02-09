@@ -1,6 +1,6 @@
 package com.obsqura.seleniumcommands;
 
-import com.obsqura.TableUtility;
+import com.obsqura.testngbasis.TableUtility;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -56,17 +56,16 @@ public class SeleniumCommands {
 
     @AfterMethod
     public void tearDone() {
-        driver.close();
+      //  driver.close();
     }
 
     @Test(priority = 1)
-
     public void verifyLogin() {
         driver.get("http://demowebshop.tricentis.com/");
         WebElement loginMenu = driver.findElement(By.xpath("//a[@class='ico-login']"));
         loginMenu.click();
         WebElement email = driver.findElement(By.id("Email"));
-        email.sendKeys("parvathyk2@gmail.com");
+        email.sendKeys("user234@gmail.com");
         //email.clear();
         WebElement password = driver.findElement(By.cssSelector("#Password"));
         password.sendKeys("Password#1998");
@@ -84,6 +83,8 @@ public class SeleniumCommands {
         boolean displayedStatus = loginButton.isDisplayed();
         System.out.println(displayedStatus);
         loginButton.click();
+
+
     }
 
     @Test(priority = 2)
@@ -271,7 +272,7 @@ public class SeleniumCommands {
     public void verifyMouseOverActions() {
         driver.get("https://demoqa.com/menu/");
         //driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-        // selectMainItem("Main Item 2");
+         selectMainItem("Main Item 2");
     }
 
     public void selectMainItem(String text) {
@@ -284,7 +285,7 @@ public class SeleniumCommands {
         }
     }
 
-    @Test(priority = 14)
+    @Test(priority = 14) // Doubt HomeWork
     public void verifyResizeByClickAndHold() throws InterruptedException {
         driver.get("https://demoqa.com/resizable");
         driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
@@ -412,7 +413,7 @@ public class SeleniumCommands {
         List<String> expData = new ArrayList<>(Arrays.asList("Island Trading", "Helen Bennett", "UK"));
         List<WebElement> rowElement = driver.findElements(By.xpath("//table[@id='customers']//tr"));
         List<WebElement> colElement = driver.findElements(By.xpath("//table[@id='customers']//tr//td"));
-        List<ArrayList<String>> dataTable = TableUtility.get_Dynamic_TwoDimension_TableElements(rowElement,colElement);
+        List<ArrayList<String>> dataTable = TableUtility.get_Dynamic_TwoDimension_TableElements(rowElement, colElement);
         System.out.println(dataTable);
         String value = dataTable.get(3).get(0);
         System.out.println(value);

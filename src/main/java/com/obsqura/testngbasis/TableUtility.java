@@ -1,4 +1,4 @@
-package com.obsqura;
+package com.obsqura.testngbasis;
 
 import org.openqa.selenium.WebElement;
 
